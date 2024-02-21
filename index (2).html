@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dimmed Background Image</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide overflow content */
+    position: relative; /* Make sure the container is positioned */
+    height: 100vh; /* Make sure the container takes full viewport height */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('background.png') no-repeat;
+    background-size: cover;
+    background-position: center center; /* Display the center part of the background image */
+    transition: background-image 0.8s ease; /* Smooth transition for background image */
+  }
+  .title {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 36px; /* Increased font size */
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none; /* Remove default underline */
+    transition: color 0.8s ease; /* Smooth transition for text color */
+  }
+  .title::after {
+    content: '';
+    display: block;
+    width: 100px; /* Adjust the width of the curved underline */
+    height: 20px; /* Adjust the height of the curved underline */
+    background-color: white;
+    border-radius: 50px; /* Adjust the border radius to make it curved */
+    margin: 0 auto; /* Center the curved underline */
+    margin-top: 10px; /* Adjust the spacing between the title and the underline */
+    transition: background-color 0.8s ease; /* Smooth transition for underline color */
+  }
+  .centered-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%; /* Make it circular */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add shadow effect */
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease; /* Add transition */
+    opacity: 0; /* Initially hide the image */
+  }
+  .centered-image.active {
+    opacity: 1; /* Show the active image */
+  }
+  .centered-image:hover {
+    transform: translate(-50%, -50%) scale(1.1); /* Scale up on hover */
+    filter: brightness(1.2); /* Increase brightness on hover */
+  }
+  .bottom-section {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    width: 100%;
+  }
+  .bottom-section a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.8s ease; /* Smooth transition for text color */
+  }
+  .bottom-section a:hover {
+    color: lightblue;
+  }
+  .side-text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 250px; /* Adjust width as needed */
+    color: white;
+    text-align: center;
+    font-size: 18px; /* Increased font size */
+    line-height: 1.5;
+    padding: 10px;
+    opacity: 0.8;
+  }
+  .left-side-text {
+    left: 20px; /* Adjust position */
+  }
+  .right-side-text {
+    right: 20px; /* Adjust position */
+  }
+  .bottom-text {
+    position: absolute;
+    bottom: 50px; /* Adjust position */
+    left: 50%;
+    transform: translateX(-50%);
+    font-style: italic; /* Set font style to italic */
+    color: white;
+  }
+</style>
+</head>
+<body>
+<div class="title">Explore Islam, Peacefully</div>
+<a href="#" id="imageLink" target="_blank">
+  <img src="allah.png" alt="Allah" class="centered-image active" id="image" width="300"> <!-- Adjust the width -->
+</a>
+<!-- Your content goes here -->
+
+<div class="bottom-section">
+  <a href="https://mission.apgo.ink/donate" target="_blank">Donate</a>
+  <a href="https://mission.apgo.ink/apgo" target="_blank">About Us</a>
+</div>
+
+<div class="side-text left-side-text">
+  <p><i>"Indeed, Allah does not do injustice, [even] as much as an atom's weight; while if there is a good deed, He multiplies it and gives from Himself a great reward." (Surah An-Nisa, 4:40)</i></p>
+</div>
+
+<div class="side-text right-side-text">
+  <p><i>"So remember Me; I will remember you. And be grateful to Me and do not deny Me." (Surah Al-Baqarah, 2:152)</i></p>
+</div>
+
+<div class="bottom-text">
+  <p><i>La ilaha illa Allah</i></p>
+</div>
+
+<script>
+  const images = ['allah.png', 'foundationofislam.png', 'ramadan.png', 'noblequran.png'];
+  const links = ['https://islam.apgo.ink/allah', 'https://islam.apgo.ink/foundationofislam', 'https://islam.apgo.ink/ramadan', 'https://islam.apgo.ink/quran'];
+  let currentIndex = 0;
+
+  function changeImage() {
+    const image = document.getElementById('image');
+    const imageLink = document.getElementById('imageLink');
+
+    // Fade out the current image
+    image.style.opacity = 0;
+
+    setTimeout(() => {
+      // Move to the next image
+      currentIndex = (currentIndex + 1) % images.length;
+
+      // Set the next image
+      image.src = images[currentIndex];
+      imageLink.href = links[currentIndex];
+
+      // Fade in the next image
+      setTimeout(() => {
+        image.style.opacity = 1;
+      }, 300); // Adjust the duration of the fade in
+    }, 300); // Adjust the duration of the fade out
+  }
+
+  setInterval(changeImage, 4000); // Change image every 4 seconds
+</script>
+
+</body>
+</html>
